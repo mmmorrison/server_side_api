@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
 router.get('/books', function (req, res, next) {
   unirest.get('http://api.nytimes.com/svc/books/v3/lists/hardcover-fiction.json?api-key=' + key)
     .end(function (response) {
-      console.log(response.body);
-  res.render('books')
+      console.log(response.body.results.books[0]);
+  res.render('books', {books:response.body.results.books})
 })
 });
 
