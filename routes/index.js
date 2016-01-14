@@ -7,7 +7,7 @@ var key = process.env.NYT_API_KEY;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'books' });
 });
 
 router.get('/books', function (req, res, next) {
