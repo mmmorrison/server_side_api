@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var unirest = require('unirest');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+var unirest = require('unirest');
 app.use('/', routes);
 app.use('/users', users);
 
@@ -33,7 +34,12 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
+app.get('/books', function(req, res) {
+    unirest.get('http://api.nytimes.com/svc/books/v3/lists/hardcover-fiction.json?api-key=' + NYT_API_KEY)
+      .end(function (response) {
+        console.log(response.body);
+      })
+})
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
